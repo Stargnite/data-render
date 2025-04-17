@@ -11,7 +11,7 @@ function ServiceDetails() {
   useEffect(() => {
     const fetchService = async () => {
       try {
-        const response = await fetch(`https://demoapiconsult.thesharepage.com/api/v1/services/${id}`);
+        const response = await fetch(`https://consultapi.vindove.com/api/v1/services/${id}`);
         const data = await response.json();
         setService(data.data); // adjust based on actual API response
       } catch (error) {
@@ -22,7 +22,7 @@ function ServiceDetails() {
     fetchService();
   }, [id]);
 
-  if (!service) return <p>Loading...</p>;
+  if (!service) return <p className='text-2xl p-3'>Loading...</p>;
 
   return (
     <div className='p-5'>
@@ -33,7 +33,7 @@ function ServiceDetails() {
         ← Back
       </button>
 
-			
+
       <h1 className='font-bold text-3xl mb-5'>{service.name}</h1>
       <p><span className='font-bold'>Description:</span> {service.description}</p>
       <p><span className='font-bold'>Website:</span> {service.website_url}</p>

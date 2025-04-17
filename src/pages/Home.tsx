@@ -13,7 +13,7 @@ function Home() {
 		const fetchServices = async () => {
 			try {
 				setIsLoading(true)
-				const response = await fetch('https://demoapiconsult.thesharepage.com/api/v1/services')
+				const response = await fetch('https://consultapi.vindove.com/api/v1/services')
 				const data = await response.json();
 				setServices(data.data.data)
 				setIsLoading(false)
