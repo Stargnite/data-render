@@ -3,6 +3,7 @@ import { Button } from "./../components/ui/button"
 import { Checkbox } from "./../components/ui/checkbox"
 import { Input } from "./../components/ui/input"
 import { Label } from "./../components/ui/label"
+import {Link} from "react-router-dom"
 
 export default function LoginPage() {
   return (
@@ -62,7 +63,9 @@ export default function LoginPage() {
               </a>
             </div> */}
 
+            <Link to="/">
             <Button className="w-full h-12 bg-purple-500 hover:bg-purple-600 rounded-lg">Sign in</Button>
+            </Link>
 
             {/* <div className="text-center">
               <p className="text-gray-500">

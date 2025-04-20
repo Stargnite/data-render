@@ -36,7 +36,7 @@ export default function ServiceTable() {
   }, [])
 
   return (
-    <div className="p-5 text-black">
+    <div className="p-5 text-black bg-gray-800">
       <h1 className="font-bold text-4xl mb-10 text-white">Services</h1>
 
       {isLoading ? (
