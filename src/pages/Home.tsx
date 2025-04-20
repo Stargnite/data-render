@@ -14,19 +14,21 @@ export default function ServiceTable() {
       const token = '587|IJcCL8mvWacTZVflrJYFRsKF89HvVwpwUktpkMQv46fa4073';
       try {
         setIsLoading(true)
-        const response = await fetch("https://consultapi.vindove.com/api/v1/admin/services", {
+        const response = await fetch("https://consultapi.vindove.com/api/v1/services", {
           method: "GET",
           headers: {
             "Content-Type": "application/vnd.api+json",
             "Authorization": `Bearer ${token}`
           }
-        })
+        }
+        )
         const data = await response.json()
         setServices(data.data.data)
         setIsLoading(false)
         console.log(data.data.data)
       } catch (error) {
         console.error("Error fetching services:", error)
+        setIsLoading(false)
       }
     }
 

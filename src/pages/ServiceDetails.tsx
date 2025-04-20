@@ -34,12 +34,15 @@ export default function ServiceDetails() {
 
   const handleSubmit = async () => {
     if (!service) return
+
+    const token = '587|IJcCL8mvWacTZVflrJYFRsKF89HvVwpwUktpkMQv46fa4073';
     try {
       setIsSubmitting(true)
-      const response = await fetch(`https://consultapi.vindove.com/api/v1/services/${id}`, {
+      const response = await fetch(`https://consultapi.vindove.com/api/v1/admin/services/${id}`, {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/vnd.api+json",
+          "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify(service),
       })
@@ -71,7 +74,7 @@ export default function ServiceDetails() {
           <div>
             <h2 className="text-xl font-semibold mb-4">Service Information</h2>
             <label className="block mb-2">Description</label>
-            <textarea
+            <input
               className="w-full border rounded p-2"
               value={service.description || ''}
               onChange={(e) => handleChange("description", e.target.value)}
