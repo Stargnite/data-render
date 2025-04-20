@@ -7,7 +7,7 @@ export default function ServiceDetails() {
   const [isLoading, setIsLoading] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { id } = useParams()
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchServiceDetails = async () => {
