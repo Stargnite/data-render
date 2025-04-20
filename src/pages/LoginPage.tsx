@@ -1,11 +1,28 @@
-import { Facebook, Github, EyeOff } from "lucide-react"
-import { Button } from "./../components/ui/button"
-import { Checkbox } from "./../components/ui/checkbox"
-import { Input } from "./../components/ui/input"
-import { Label } from "./../components/ui/label"
-import {Link} from "react-router-dom"
+import {
+  // Facebook, Github,
+  EyeOff,
+} from "lucide-react";
+import { Button } from "./../components/ui/button";
+// import { Checkbox } from "./../components/ui/checkbox"
+import { Input } from "./../components/ui/input";
+import { Label } from "./../components/ui/label";
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function LoginPage() {
+  const [tokenInput, setTokenInput] = useState("");
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    if (tokenInput.trim()) {
+      login(tokenInput.trim());
+      navigate("/");
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <div className="flex-1 flex items-center justify-center p-4">
@@ -20,7 +37,7 @@ export default function LoginPage() {
           <div className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="email" className="text-gray-600">
-                Email or Username
+                Email
               </Label>
               <Input
                 id="email"
@@ -41,6 +58,8 @@ export default function LoginPage() {
                   type="password"
                   placeholder="••••••••••"
                   className="border-purple-300 focus:border-purple-500 focus:ring-purple-500 h-12 rounded-lg pr-10"
+                  value={tokenInput}
+                  onChange={(e) => setTokenInput(e.target.value)}
                 />
                 <button className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
                   <EyeOff size={20} />
@@ -48,7 +67,21 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* <div className="flex items-center justify-between">
+            <Button
+              className="w-full h-12 bg-purple-500 hover:bg-purple-600 rounded-lg"
+              onClick={handleLogin}
+            >
+              Sign in
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+{
+  /* <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="remember"
@@ -61,31 +94,33 @@ export default function LoginPage() {
               <a href="/forgot-password" className="text-purple-500 hover:text-purple-600 text-sm">
                 Forgot Password?
               </a>
-            </div> */}
+            </div> */
+}
 
-            <Link to="/">
-            <Button className="w-full h-12 bg-purple-500 hover:bg-purple-600 rounded-lg">Sign in</Button>
-            </Link>
-
-            {/* <div className="text-center">
+{
+  /* <div className="text-center">
               <p className="text-gray-500">
                 New on our platform?
                 <a href="/register" className="text-purple-500 hover:text-purple-600 ml-1">
                   Create an account
                 </a>
               </p>
-            </div> */}
+            </div> */
+}
 
-            {/* <div className="relative">
+{
+  /* <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300"></div>
               </div>
               <div className="relative flex justify-center text-sm">
                 <span className="px-2 bg-white text-gray-500">or</span>
               </div>
-            </div> */}
+            </div> */
+}
 
-            {/* <div className="flex justify-center space-x-6">
+{
+  /* <div className="flex justify-center space-x-6">
               <button className="text-blue-600 hover:text-blue-700">
                 <Facebook size={24} />
               </button>
@@ -131,10 +166,5 @@ export default function LoginPage() {
                   <path d="M7.20039 7.2L10.8004 10.8L13.2004 13.2L14.4004 14.4L16.8004 16.8V7.2H7.20039Z" fill="none" />
                 </svg>
               </button>
-            </div> */}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+            </div> */
 }

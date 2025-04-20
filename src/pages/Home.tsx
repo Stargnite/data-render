@@ -1,43 +1,53 @@
-import { useEffect, useState } from "react"
-import type { Service } from "./../lib/types"
-import { useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react";
+import type { Service } from "./../lib/types";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function ServiceTable() {
-  const [services, setServices] = useState<Service[]>([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [services, setServices] = useState<Service[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchServices = async () => {
-
-      const token = '587|IJcCL8mvWacTZVflrJYFRsKF89HvVwpwUktpkMQv46fa4073';
+      const token = "587|IJcCL8mvWacTZVflrJYFRsKF89HvVwpwUktpkMQv46fa4073";
       try {
-        setIsLoading(true)
-        const response = await fetch("https://consultapi.vindove.com/api/v1/services", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/vnd.api+json",
-            "Authorization": `Bearer ${token}`
+        setIsLoading(true);
+        const response = await fetch(
+          "https://consultapi.vindove.com/api/v1/services",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/vnd.api+json",
+              Authorization: `Bearer ${token}`,
+            },
           }
-        }
-        )
-        const data = await response.json()
-        setServices(data.data.data)
-        setIsLoading(false)
-        console.log(data.data.data)
+        );
+        const data = await response.json();
+        setServices(data.data.data);
+        setIsLoading(false);
+        console.log(data.data.data);
       } catch (error) {
-        console.error("Error fetching services:", error)
-        setIsLoading(false)
+        console.error("Error fetching services:", error);
+        setIsLoading(false);
       }
-    }
+    };
 
-    fetchServices()
-  }, [])
+    fetchServices();
+  }, []);
 
   return (
     <div className="p-5 text-black bg-gray-800">
+      <div className="flex justify-between items-center">
       <h1 className="font-bold text-4xl mb-10 text-white">Services</h1>
+      {isAuthenticated && (
+        <button onClick={logout} className="text-red-600 underline ">
+          Logout
+        </button>
+      )}
+      </div>
 
       {isLoading ? (
         <div className="flex justify-center items-center h-40">
@@ -48,18 +58,28 @@ export default function ServiceTable() {
           <table className="w-full border-collapse">
             <thead>
               <tr className="border-b text-white">
-                <th className="py-4 px-6 text-left font-semibold">SERVICE NAME</th>
-                <th className="py-4 px-6 text-left font-semibold">SERVICE ID</th>
+                <th className="py-4 px-6 text-left font-semibold">
+                  SERVICE NAME
+                </th>
+                <th className="py-4 px-6 text-left font-semibold">
+                  SERVICE ID
+                </th>
                 <th className="py-4 px-6 text-left font-semibold">COUNTRY</th>
-                <th className="py-4 px-6 text-left font-semibold">SERVICE TYPE</th>
-                <th className="py-4 px-6 text-left font-semibold">EXPERIENCE</th>
+                <th className="py-4 px-6 text-left font-semibold">
+                  SERVICE TYPE
+                </th>
+                <th className="py-4 px-6 text-left font-semibold">
+                  EXPERIENCE
+                </th>
               </tr>
             </thead>
             <tbody>
               {services.map((service, index) => (
                 <tr
                   key={service.id}
-                  className={`border-b ${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 cursor-pointer transition-colors`}
+                  className={`border-b ${
+                    index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                  } hover:bg-gray-100 cursor-pointer transition-colors`}
                   onClick={() => navigate(`/service/${service.id}`)}
                 >
                   <td className="py-4 px-6">
@@ -69,7 +89,9 @@ export default function ServiceTable() {
                       </div>
                       <div>
                         <div className="font-medium">{service.name}</div>
-                        <div className="text-sm text-gray-500">{service.website_url || "No website"}</div>
+                        <div className="text-sm text-gray-500">
+                          {service.website_url || "No website"}
+                        </div>
                       </div>
                     </div>
                   </td>
@@ -81,7 +103,9 @@ export default function ServiceTable() {
                     </div>
                   </td>
                   <td className="py-4 px-6">{service.service_type || "N/A"}</td>
-                  <td className="py-4 px-6">${service.year_of_experience || "0"} years</td>
+                  <td className="py-4 px-6">
+                    ${service.year_of_experience || "0"} years
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -89,5 +113,5 @@ export default function ServiceTable() {
         </div>
       )}
     </div>
-  )
+  );
 }

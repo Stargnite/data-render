@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import type { Service } from "./../lib/types"
 import { useParams, useNavigate } from "react-router-dom"
+import { useAuth } from "../contexts/AuthContext"
+
 
 export default function ServiceDetails() {
   const [service, setService] = useState<Service | null>(null)
@@ -8,6 +10,8 @@ export default function ServiceDetails() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { id } = useParams()
   const navigate = useNavigate();
+  const { isAuthenticated, token } = useAuth();
+
 
   useEffect(() => {
     const fetchServiceDetails = async () => {
@@ -62,7 +66,7 @@ export default function ServiceDetails() {
 
   return (
     <div className="p-5">
-      <button onClick={() => navigate(-1)} className="mb-6 flex items-center gap-2 text-white transition-all hover:text-gray-500">
+      <button onClick={() => navigate(-1)} className="mb-6 flex items-center gap-2 text-white transition-all bg-gray-900 p-3 rounded-md hover:text-gray-500">
         <span>←</span>
         Back to services
       </button>
