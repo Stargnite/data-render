@@ -10,7 +10,7 @@ export default function ServiceDetails() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { id } = useParams()
   const navigate = useNavigate();
-  const { isAuthenticated, token } = useAuth();
+  // const { isAuthenticated, token } = useAuth();
 
 
   useEffect(() => {

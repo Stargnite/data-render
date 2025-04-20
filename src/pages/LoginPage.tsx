@@ -12,14 +12,85 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function LoginPage() {
-  const [tokenInput, setTokenInput] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+   const [isLoading, setIsLoading] = useState(false)
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    if (tokenInput.trim()) {
-      login(tokenInput.trim());
-      navigate("/");
+  // consultapi.vindove.com
+
+
+  // const handleChange = (field: keyof Service, value: string) => {
+  //     if (!service) return
+  //     setService({ ...service, [field]: value })
+  //   }
+
+  // const handleLogin = async() => {
+  //   const token = "587|IJcCL8mvWacTZVflrJYFRsKF89HvVwpwUktpkMQv46fa4073";
+  //   if (password.trim()) {
+  //     login(password.trim());
+  //     navigate("/");
+  //   }
+
+  //     try {
+  //       setIsLoading(true);
+  //       const response = await fetch(
+  //         "https://consultapi.vindove.com/api/v1/admin/login",
+  //         {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/vnd.api+json",
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         }
+  //       );
+  //       const data = await response.json();
+  //       console.log(data.data.data);
+  //     } catch (error) {
+  //       console.error("Error fetching services:", error);
+  //       setIsLoading(false);
+  //     }
+  // };
+
+  const handleLogin = async () => {
+    const token = "587|IJcCL8mvWacTZVflrJYFRsKF89HvVwpwUktpkMQv46fa4073";
+  
+    try {
+      setIsLoading(true);
+  
+      const response = await fetch("https://consultapi.vindove.com/api/v1/admin/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/vnd.api+json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          data: {
+            type: "users",
+            attributes: {
+              email: email.trim(),
+              password: password,
+            },
+          },
+        }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        console.log("Login successful:", data);
+        login(password); // local login if needed
+        navigate("/");
+      } else {
+        console.error("Login failed:", data);
+        alert("Login failed. Check your credentials.");
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+      alert("An error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -43,6 +114,8 @@ export default function LoginPage() {
                 id="email"
                 placeholder="Enter your email or username"
                 className="border-purple-300 focus:border-purple-500 focus:ring-purple-500 h-12 rounded-lg"
+                value={email}
+                  onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -58,8 +131,8 @@ export default function LoginPage() {
                   type="password"
                   placeholder="••••••••••"
                   className="border-purple-300 focus:border-purple-500 focus:ring-purple-500 h-12 rounded-lg pr-10"
-                  value={tokenInput}
-                  onChange={(e) => setTokenInput(e.target.value)}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <button className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
                   <EyeOff size={20} />
