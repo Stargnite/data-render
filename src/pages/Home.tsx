@@ -10,9 +10,17 @@ export default function ServiceTable() {
 
   useEffect(() => {
     const fetchServices = async () => {
+
+      const token = '587|IJcCL8mvWacTZVflrJYFRsKF89HvVwpwUktpkMQv46fa4073';
       try {
         setIsLoading(true)
-        const response = await fetch("https://consultapi.vindove.com/api/v1/services")
+        const response = await fetch("https://consultapi.vindove.com/api/v1/admin/services", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/vnd.api+json",
+            "Authorization": `Bearer ${token}`
+          }
+        })
         const data = await response.json()
         setServices(data.data.data)
         setIsLoading(false)
