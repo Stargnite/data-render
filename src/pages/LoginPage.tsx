@@ -7,19 +7,19 @@ import { Button } from "./../components/ui/button";
 import { Input } from "./../components/ui/input";
 import { Label } from "./../components/ui/label";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function LoginPage() {
-  const [password, setPassword] = useState("");
+  // const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-   const [isLoading, setIsLoading] = useState(false)
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
   // consultapi.vindove.com
-
 
   // const handleChange = (field: keyof Service, value: string) => {
   //     if (!service) return
@@ -54,33 +54,34 @@ export default function LoginPage() {
   // };
 
   const handleLogin = async () => {
-    const token = "587|IJcCL8mvWacTZVflrJYFRsKF89HvVwpwUktpkMQv46fa4073";
-  
+    // const token = "587|IJcCL8mvWacTZVflrJYFRsKF89HvVwpwUktpkMQv46fa4073";
+    // Authorization: `Bearer ${token}`,
+
     try {
       setIsLoading(true);
-  
-      const response = await fetch("https://consultapi.vindove.com/api/v1/admin/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/vnd.api+json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          data: {
-            type: "users",
-            attributes: {
-              email: email.trim(),
-              password: password,
-            },
+
+      const response = await fetch(
+        "https://consultapi.vindove.com/api/v1/admin/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        }),
-      });
-  
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            // name: name,
+          }),
+        }
+      );
+
       const data = await response.json();
-  
+      console.log(data);
+
       if (response.ok) {
         console.log("Login successful:", data);
-        login(password); // local login if needed
+        const authToken = data.data["0"];
+        login(authToken);
         navigate("/");
       } else {
         console.error("Login failed:", data);
@@ -100,22 +101,40 @@ export default function LoginPage() {
         <div className="w-full max-w-md space-y-8 px-4">
           <div className="text-center space-y-2">
             <h1 className="text-3xl font-semibold text-gray-800">
-              Welcome to Vuexy! <span className="text-2xl">👋</span>
+              Welcome! <span className="text-2xl">👋</span>
             </h1>
             <p className="text-gray-500">Please sign-in to your account</p>
           </div>
 
           <div className="space-y-6">
+            {/* <div className="space-y-2">
+              <div className="flex justify-between">
+                <Label htmlFor="name" className="text-gray-600">
+                  name
+                </Label>
+              </div>
+              <div className="relative">
+                <Input
+                  id="name"
+                  type="name"
+                  placeholder="name"
+                  className="border-purple-300 focus:border-purple-500 focus:ring-purple-500 h-12 rounded-lg pr-10"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+            </div> */}
+
             <div className="space-y-2">
               <Label htmlFor="email" className="text-gray-600">
                 Email
               </Label>
               <Input
                 id="email"
-                placeholder="Enter your email or username"
+                placeholder="Enter your email"
                 className="border-purple-300 focus:border-purple-500 focus:ring-purple-500 h-12 rounded-lg"
                 value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -129,7 +148,7 @@ export default function LoginPage() {
                 <Input
                   id="password"
                   type="password"
-                  placeholder="••••••••••"
+                  placeholder="password"
                   className="border-purple-300 focus:border-purple-500 focus:ring-purple-500 h-12 rounded-lg pr-10"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -141,13 +160,20 @@ export default function LoginPage() {
             </div>
 
             <Button
-              className="w-full h-12 bg-purple-500 hover:bg-purple-600 rounded-lg"
+              disabled={isLoading}
+              className="w-full h-12 bg-gray-800 hover:bg-grsy-600 rounded-lg"
               onClick={handleLogin}
             >
               Sign in
             </Button>
           </div>
         </div>
+
+        {/* {isLoading && (
+          <div className="flex justify-center items-center h-40">
+            <p className="text-2xl text-gray-500">Loading...</p>
+          </div>
+        )} */}
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ export default function ServiceTable() {
       try {
         setIsLoading(true);
         const response = await fetch(
-          "https://consultapi.vindove.com/api/v1/services",
+          "https://consultapi.vindove.com/api/v1/admin/services",
           {
             method: "GET",
             headers: {
