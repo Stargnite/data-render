@@ -3,7 +3,6 @@ import type { Service } from "./../lib/types";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-
 export default function ServiceTable() {
   const [services, setServices] = useState<Service[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -39,18 +38,28 @@ export default function ServiceTable() {
   }, [pageNumber]);
 
   return (
-    <div className="p-5 text-black bg-gray-800">
-      <div className="flex justify-between items-center">
-      <h1 className="font-bold text-4xl mb-10 text-white">Services</h1>
-      {isAuthenticated && (
-        <button onClick={() => {
-          logout()
-          navigate("/login")
-        }} className="text-red-600 underline ">
-          Logout
-        </button>
-      )}
+    <div className="relative text-black bg-gray-800 w-full">
+      <div className="flex justify-between items-center border border-b-gray-400 mb-5 p-5 px-6 shadow-2xl fixed w-full bg-gray-800">
+        <h1 className="font-bold text-4xl text-white">Services</h1>
+        <div className="flex justify-between items-center text-white gap-x-5">
+          {/* <h1 className="">Services</h1> */}
+          <p onClick={() => navigate("/service-categories")} className="cursor-pointer ho">Categories</p>
+          {isAuthenticated && (
+            <button
+              onClick={() => {
+                logout();
+                navigate("/login");
+              }}
+              className="text-blue-600 underline "
+            >
+              Logout
+            </button>
+          )}
+        </div>
       </div>
+      <h1 className="font-bold text-2xl mb-10 text-white pt-24 px-6">
+        Available Services
+      </h1>
 
       {isLoading ? (
         <div className="flex justify-center items-center h-40">
@@ -113,11 +122,26 @@ export default function ServiceTable() {
               ))}
             </tbody>
           </table>
-              <div className="flex justify-center gap-x-5 items-center my-5">
-                <button className="text-lg text-blue-500 cursor-pointer" onClick={()=> setPageNumber(1)}>1</button>
-                <button className="text-lg text-blue-500 cursor-pointer" onClick={()=> setPageNumber(2)}>2</button>
-                <button className="text-lg text-blue-500 cursor-pointer" onClick={()=> setPageNumber(3)}>3</button>
-              </div>
+          <div className="flex justify-center gap-x-5 items-center my-5">
+            <button
+              className="text-lg text-blue-500 cursor-pointer"
+              onClick={() => setPageNumber(1)}
+            >
+              1
+            </button>
+            <button
+              className="text-lg text-blue-500 cursor-pointer"
+              onClick={() => setPageNumber(2)}
+            >
+              2
+            </button>
+            <button
+              className="text-lg text-blue-500 cursor-pointer"
+              onClick={() => setPageNumber(3)}
+            >
+              3
+            </button>
+          </div>
         </div>
       )}
     </div>
