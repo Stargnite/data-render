@@ -103,7 +103,7 @@ export default function LoginPage() {
 
             <Button
               disabled={isLoading}
-              className={`w-full h-12 bg-gray-800 hover:bg-gray-600 rounded-lg transition-all ${isLoading && "cursor-disabled"}`}
+              className={`w-full h-12 bg-gray-800 hover:bg-gray-600 rounded-lg transition-all text-white ${isLoading && "cursor-disabled"}`}
               type="submit"
             >
               {isLoading ? "Loading..." : "Sign in"}

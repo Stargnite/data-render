@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function ServiceTable() {
   const [services, setServices] = useState<Service[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [pageNumber, setPageNumber] = useState(1);
   const { isAuthenticated, logout, token } = useAuth();
   const navigate = useNavigate();
 
@@ -15,7 +16,7 @@ export default function ServiceTable() {
       try {
         setIsLoading(true);
         const response = await fetch(
-          "https://consultapi.vindove.com/api/v1/admin/services",
+          `https://consultapi.vindove.com/api/v1/admin/services?page=${pageNumber}`,
           {
             method: "GET",
             headers: {
@@ -26,7 +27,6 @@ export default function ServiceTable() {
         );
         const data = await response.json();
         setServices(data.data.data);
-        console.log
         setIsLoading(false);
         console.log("", data.data.data);
       } catch (error) {
@@ -36,7 +36,7 @@ export default function ServiceTable() {
     };
 
     fetchServices();
-  }, []);
+  }, [pageNumber]);
 
   return (
     <div className="p-5 text-black bg-gray-800">
@@ -113,6 +113,11 @@ export default function ServiceTable() {
               ))}
             </tbody>
           </table>
+              <div className="flex justify-center gap-x-5 items-center my-5">
+                <button className="text-lg text-blue-500 cursor-pointer" onClick={()=> setPageNumber(1)}>1</button>
+                <button className="text-lg text-blue-500 cursor-pointer" onClick={()=> setPageNumber(2)}>2</button>
+                <button className="text-lg text-blue-500 cursor-pointer" onClick={()=> setPageNumber(3)}>3</button>
+              </div>
         </div>
       )}
     </div>
