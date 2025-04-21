@@ -48,6 +48,7 @@ export default function ServiceDetails() {
 
     try {
       setIsSubmitting(true);
+      console.log("Token being used>>>>>>>>.", token)
 
       const response = await fetch(
         `https://consultapi.vindove.com/api/v1/admin/services/${id}`,
