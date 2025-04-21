@@ -1,5 +1,11 @@
 // src/contexts/AuthContext.tsx
-import { createContext, useContext, useState, ReactNode, useEffect } from "react"
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 
 type AuthContextType = {
   isAuthenticated: boolean;
@@ -18,7 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (storedToken) setToken(storedToken);
   }, []);
 
-  const login = (newToken: string) => {
+  const login = async (newToken: string) => {
     localStorage.setItem("auth_token", newToken);
     setToken(newToken);
   };

@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
 import type { Service } from "./../lib/types";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+
 
 export default function ServiceTable() {
   const [services, setServices] = useState<Service[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { isAuthenticated, logout } = useAuth();
-
+  const { isAuthenticated, logout, token } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchServices = async () => {
-      const token = "587|IJcCL8mvWacTZVflrJYFRsKF89HvVwpwUktpkMQv46fa4073";
       try {
         setIsLoading(true);
         const response = await fetch(
@@ -27,8 +26,9 @@ export default function ServiceTable() {
         );
         const data = await response.json();
         setServices(data.data.data);
+        console.log
         setIsLoading(false);
-        console.log(data.data.data);
+        console.log("", data.data.data);
       } catch (error) {
         console.error("Error fetching services:", error);
         setIsLoading(false);
@@ -43,7 +43,10 @@ export default function ServiceTable() {
       <div className="flex justify-between items-center">
       <h1 className="font-bold text-4xl mb-10 text-white">Services</h1>
       {isAuthenticated && (
-        <button onClick={logout} className="text-red-600 underline ">
+        <button onClick={() => {
+          logout()
+          navigate("/login")
+        }} className="text-red-600 underline ">
           Logout
         </button>
       )}
