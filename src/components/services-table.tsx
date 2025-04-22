@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Service } from "@/lib/types";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import ServiceDetails from "@/pages/ServiceDetails";
 // import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 // import { Badge } from "@/components/ui/badge"
@@ -34,7 +34,7 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<Partial<Service>>({});
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { token } = useAuth();
 
   const startEditing = (service: Service) => {

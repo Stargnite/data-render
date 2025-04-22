@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuth } from "./../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-type CategoriesType = {
-  id: string
-  name: string
-  description: string
-  slug: string
-  icon_url: string
+// type CategoriesType = {
+//   id: string
+//   name: string
+//   description: string
+//   slug: string
+//   icon_url: string
 
-}
+// }
 
 const CategoriesPage = () => {
-  const [categories, setCategories] = useState<CategoriesType[]>([]);
+  // const [categories, setCategories] = useState<CategoriesType[]>([]);
   const navigate = useNavigate();
   const { token } = useAuth();
   useEffect(() => {
