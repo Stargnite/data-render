@@ -22,6 +22,7 @@ const CategoriesPage = () => {
 
         const data = response.json();
         setCategories(data);
+        console.log(categories)
         console.log("Service categories data>>>>>>>>>>>>>>", data);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
