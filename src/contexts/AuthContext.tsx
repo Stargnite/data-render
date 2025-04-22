@@ -29,7 +29,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setToken(newToken);
   };
 
-  const logout = () => {
+  const logout = async() => {
+    const URL = 'https://consultapi.vindove.com/api/v1/admin/logout'
+    try {
+          const response = await fetch(URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
+          });
+          const data = await response.json();
+          console.log(data.message);
+        } catch (err) {
+          console.log(err);
+        }
     localStorage.removeItem("auth_token");
     setToken(null);
   };

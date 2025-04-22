@@ -1,42 +1,36 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import ServiceDetails from "./pages/ServiceDetails";
-import CategoriesPage from "./pages/CategoriesPage";
-import LoginPage from "./pages/LoginPage";
 import { AuthProvider } from "./contexts/AuthContext";
+import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { AdminDashboard } from "./pages/dashboard";
+import { SidebarProvider } from "./components/ui/sidebar";
+import CategoriesPage from "./pages/CategoriesPage";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/categories"
+            element={
+              <ProtectedRoute>
+                <CategoriesPage />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/"
             element={
               <ProtectedRoute>
-                <Home />
+                <SidebarProvider>
+                  <AdminDashboard />
+                </SidebarProvider>
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/service/:id"
-            element={
-              <ProtectedRoute>
-                <ServiceDetails />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/service-categories"
-            element={
-              // <ProtectedRoute>
-                <CategoriesPage />
-              // </ProtectedRoute>
-            }
-          />
-          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Router>
     </AuthProvider>
@@ -44,3 +38,9 @@ function App() {
 }
 
 export default App;
+
+// import Home from "./pages/Home";
+// import ServiceDetails from "./pages/ServiceDetails";
+
+// import type { Service } from "./lib/types";
+// import { useNavigate } from "react-router-dom";

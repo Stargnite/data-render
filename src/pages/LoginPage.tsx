@@ -1,9 +1,5 @@
-import {
-  // Facebook, Github,
-  EyeOff,
-} from "lucide-react";
+// import { EyeOff } from "lucide-react";
 import { Button } from "./../components/ui/button";
-// import { Checkbox } from "./../components/ui/checkbox"
 import { Input } from "./../components/ui/input";
 import { Label } from "./../components/ui/label";
 
@@ -12,15 +8,15 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function LoginPage() {
-  // const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  // const [passwordIsVisible, setPasswordIsVisible] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     const URL = "https://consultapi.vindove.com/api/v1/admin/login";
 
     try {
@@ -54,6 +50,10 @@ export default function LoginPage() {
       console.log(err);
     }
   };
+
+  // const togglePassword = () => {
+  //   setPasswordIsVisible(!passwordIsVisible);
+  // };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -89,21 +89,29 @@ export default function LoginPage() {
               <div className="relative">
                 <Input
                   id="password"
-                  type="password"
+                  type={
+                    // passwordIsVisible ? "text" : 
+                    "password"
+                  }
                   placeholder="password"
                   className="border-purple-300 focus:border-purple-500 focus:ring-purple-500 h-12 rounded-lg pr-10"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <button className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
+                {/* <button
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 cursor-pointer hover:bg-gray-400"
+                  onClick={togglePassword}
+                >
                   <EyeOff size={20} />
-                </button>
+                </button> */}
               </div>
             </div>
 
             <Button
               disabled={isLoading}
-              className={`w-full h-12 bg-gray-800 hover:bg-gray-600 rounded-lg transition-all text-white ${isLoading && "cursor-disabled"}`}
+              className={`w-full h-12 bg-gray-800 hover:bg-gray-600 rounded-lg transition-all text-white ${
+                isLoading && "cursor-disabled"
+              }`}
               type="submit"
             >
               {isLoading ? "Loading..." : "Sign in"}
