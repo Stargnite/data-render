@@ -1,44 +1,46 @@
-import { useEffect, useState } from "react";
-import { useAuth } from "./../contexts/AuthContext";
+// import { useEffect, 
+//   useState
+//  } from "react";
+// import { useAuth } from "./../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-type CategoriesType = {
-  id: string
-  name: string
-  description: string
-  slug: string
-  icon_url: string
+// type CategoriesType = {
+//   id: string
+//   name: string
+//   description: string
+//   slug: string
+//   icon_url: string
 
-}
+// }
 
 const CategoriesPage = () => {
-  const [categories, setCategories] = useState<CategoriesType[]>([]);
+  // const [categories, setCategories] = useState<CategoriesType[]>([]);
   const navigate = useNavigate();
-  const { token } = useAuth();
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch(
-          "https://consultapi.vindove.com/api/v1/admin/service-categories",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/vnd.api+json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+  // const { token } = useAuth();
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         "https://consultapi.vindove.com/api/v1/admin/service-categories",
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             "Content-Type": "application/vnd.api+json",
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         }
+  //       );
 
-        const data = response.json();
-        setCategories(data.data);
-        console.log("Service categories data>>>>>>>>>>>>>>", data.data);
-      } catch (error) {
-        console.error("Failed to fetch categories:", error);
-      }
-    };
+  //       // const data = response.json();
+  //       // setCategories(data.data);
+  //       // console.log("Service categories data>>>>>>>>>>>>>>", data.data);
+  //     } catch (error) {
+  //       console.error("Failed to fetch categories:", error);
+  //     }
+  //   };
 
-    fetchCategories();
-  });
+  //   fetchCategories();
+  // });
   return (
     <div className="p-5">
       <button
