@@ -43,7 +43,7 @@ export default function ServiceTable() {
         <h1 className="font-bold text-4xl text-white">Services</h1>
         <div className="flex justify-between items-center text-white gap-x-5">
           {/* <h1 className="">Services</h1> */}
-          <p onClick={() => navigate("/service-categories")} className="cursor-pointer ho">Categories</p>
+          <p onClick={() => navigate("/service-categories")} className="cursor-pointer hover:underline">Categories</p>
           {isAuthenticated && (
             <button
               onClick={() => {

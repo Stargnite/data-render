@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "./../contexts/AuthContext";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const CategoriesPage = () => {
   const [categories, setCategories] = useState<any>(null);
@@ -21,9 +21,8 @@ const CategoriesPage = () => {
         );
 
         const data = response.json();
-        setCategories(data)
-        console.log("Service categories data>>>>>>>>>>>>>>", data)
-
+        setCategories(data);
+        console.log("Service categories data>>>>>>>>>>>>>>", data);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
       }
@@ -31,13 +30,18 @@ const CategoriesPage = () => {
 
     fetchCategories();
   });
-  return <div> <button
-  onClick={() => navigate(-1)}
-  className="mb-6 flex items-center gap-2 text-white transition-all bg-gray-900 p-3 rounded-md hover:text-gray-500"
->
-  <span>←</span>
-  Back to services
-</button></div>;
+  return (
+    <div className="p-5">
+      {" "}
+      <button
+        onClick={() => navigate(-1)}
+        className="mb-6 flex items-center gap-2 text-white transition-all bg-gray-900 p-3 rounded-md hover:text-gray-500"
+      >
+        <span>←</span>
+        Back to services
+      </button>
+    </div>
+  );
 };
 
 export default CategoriesPage;
