@@ -93,8 +93,8 @@ export function AdminDashboard() {
               </div>
             </div>
             {isLoading ? (
-              <div className="flex justify-center items-center h-40">
-                <p className="text-2xl text-white">Loading...</p>
+              <div className="flex justify-center items-center h-40 text-gray-700">
+                <p className="text-2xl text-gray-700">Loading...</p>
               </div>
             ) : (
               <ServicesTable
