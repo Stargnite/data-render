@@ -271,7 +271,7 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
                         <Button
                           variant="ghost"
                           size="icon"
-                          className="hover:bg-gray-500 cursor-pointer"
+                          className="hover:bg-blue-400 hover:text-white cursor-pointer"
                         >
                           <MoreHorizontal className="h-4 w-4" />
                           <span className="sr-only">Open menu</span>
@@ -285,13 +285,13 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
                           onClick={() => startEditing(service)}
-                          className="cursor-pointer hover:bg-gray-400 transition-all"
+                          className="cursor-pointer hover:bg-blue-400 hover:text-white transition-all"
                         >
                           <Pencil className="mr-2 h-4 w-4" />
                           Edit
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          className="cursor-pointer hover:bg-gray-400 transition-all"
+                          className="cursor-pointer hover:bg-blue-400 hover:text-white transition-all"
                           // onClick={() => navigate(`/services/${service.id}`)}
                           onClick={() => setShowModal(true)}
                         >
@@ -299,7 +299,7 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
                           Full details
                         </DropdownMenuItem>
 
-                        <DropdownMenuItem className="cursor-pointer hover:bg-gray-400 transition-all">
+                        <DropdownMenuItem className="cursor-pointer hover:bg-blue-400 hover:text-white transition-all">
                           <Trash2 className="mr-2 h-4 w-4" />
                           Delete
                         </DropdownMenuItem>
