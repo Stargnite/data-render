@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import type { Service } from "./../lib/types";
-import { useParams, useNavigate } from "react-router-dom";
+// import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
-export default function ServiceDetails() {
+type ServiceModalProps = {
+  id: string;
+  onClose: () => void;
+};
+
+export default function ServiceDetails({ id, onClose }: ServiceModalProps) {
   const [service, setService] = useState<Service | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { id } = useParams();
-  const navigate = useNavigate();
+  //   const { id } = useParams();
+  //   const navigate = useNavigate();
   const { token } = useAuth();
 
   useEffect(() => {
@@ -37,145 +42,165 @@ export default function ServiceDetails() {
     }
   }, [id]);
 
-  if (isLoading) return <div className="p-5 text-2xl">Loading...</div>;
-  if (!service) return <div className="p-5 text-2xl">Service not found</div>;
+  if (isLoading)
+    return (
+      <div className="fixed inset-0 bg-black/10 bg-opacity-50 flex items-center text-start justify-center z-50 p-5">
+        <div className="bg-white rounded-lg shadow-lg p-6 max-h-[70vh] max-w-[1000px] w-full relative  overflow-y-auto">
+          <div className="p-5 text-2xl">Loading...</div>
+        </div>
+      </div>
+    );
 
-  if (isLoading) {
-    return <div className="p-5 text-2xl">Loading...</div>;
-  }
 
-  if (!service) {
-    return <div className="p-5 text-2xl">Service not found</div>;
-  }
+//   if (!isLoading && !service)
+//     return (
+//       <div className="fixed inset-0 bg-black/10 bg-opacity-50 flex items-center text-start justify-center z-50 p-5">
+//         <div className="bg-white rounded-lg shadow-lg p-6 max-h-[70vh] max-w-[1000px] w-full relative  overflow-y-auto">
+//           <div className="p-5 text-2xl">Service not found</div>
+//         </div>
+//       </div>
+//     );
 
   return (
-    <div className="p-5">
-      <button
+    <div className="fixed inset-0 bg-black/10 bg-opacity-50 flex items-center text-start justify-center z-50 p-5">
+      <div className="bg-white rounded-lg shadow-lg p-6 max-h-[70vh] max-w-[1000px] w-full relative  overflow-y-auto">
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 text-2xl font-bold cursor-pointer"
+        >
+          ×
+        </button>
+        {/* <button
         onClick={() => navigate(-1)}
         className="mb-6 flex items-center gap-2 text-white transition-all bg-gray-500 p-2 cursor-pointer rounded-sm"
       >
         <span>←</span>
         Back to services
-      </button>
+      </button> */}
 
-      <div className="bg-white rounded-lg shadow-md p-6 text-gray-800">
-        <h1 className="text-3xl font-bold mb-6">{service.name}</h1>
+        <div className="p-6 text-gray-800">
+          <h1 className="text-3xl font-bold mb-6">{service?.name}</h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Service Information</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h2 className="text-xl font-semibold mb-4">
+                Service Information
+              </h2>
+              <table className="w-full">
+                <tbody>
+                  <tr className="border-b">
+                    <td className="py-3 font-medium">Description</td>
+                    <td className="py-3">
+                      {service?.description || "No description"}
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3 font-medium">Service category</td>
+                    <td className="py-3">{service?.category.name || "N/A"}</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3 font-medium">Category ID</td>
+                    <td className="py-3">
+                      {service?.service_category_id || "N/A"}
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3 font-medium">Website</td>
+                    <td className="py-3">{service?.website_url || "N/A"}</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3 font-medium">Experience</td>
+                    <td className="py-3">
+                      {service?.year_of_experience || "0"} years
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3 font-medium">Language</td>
+                    <td className="py-3">{service?.language || "N/A"}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-semibold mb-4">
+                Location & Availability
+              </h2>
+              <table className="w-full">
+                <tbody>
+                  <tr className="border-b">
+                    <td className="py-3 font-medium">Country</td>
+                    <td className="py-3">{service?.country || "N/A"}</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3 font-medium">State</td>
+                    <td className="py-3">{service?.state || "N/A"}</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3 font-medium">City</td>
+                    <td className="py-3">{service?.city || "N/A"}</td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3 font-medium">Start Time</td>
+                    <td className="py-3">
+                      {service?.availability_start_time || "N/A"}
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3 font-medium">End Time</td>
+                    <td className="py-3">
+                      {service?.availability_end_time || "N/A"}
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="py-3 font-medium">Coordinates</td>
+                    <td className="py-3">
+                      {service?.latitude && service?.longitude ? (
+                        <p>
+                          Lattitude:{service?.latitude}, Longitude:
+                          {service?.longitude}
+                        </p>
+                      ) : (
+                        "N/A"
+                      )}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <h2 className="text-xl font-semibold mb-4">Subscription Details</h2>
             <table className="w-full">
               <tbody>
                 <tr className="border-b">
-                  <td className="py-3 font-medium">Description</td>
+                  <td className="py-3 font-medium">Subscription Type</td>
                   <td className="py-3">
-                    {service.description || "No description"}
+                    {service?.subscription_expires_at || "N/A"}
                   </td>
                 </tr>
                 <tr className="border-b">
-                  <td className="py-3 font-medium">Service Type</td>
-                  <td className="py-3">{service.category.name || "N/A"}</td>
-                </tr>
-                <tr className="border-b">
-                  <td className="py-3 font-medium">Category ID</td>
+                  <td className="py-3 font-medium">Expires At</td>
                   <td className="py-3">
-                    {service.service_category_id || "N/A"}
+                    {service?.subscription_expires_at || "N/A"}
                   </td>
                 </tr>
                 <tr className="border-b">
-                  <td className="py-3 font-medium">Website</td>
-                  <td className="py-3">{service.website_url || "N/A"}</td>
+                  <td className="py-3 font-medium">Created By</td>
+                  <td className="py-3">{service?.created_by || "N/A"}</td>
                 </tr>
                 <tr className="border-b">
-                  <td className="py-3 font-medium">Experience</td>
-                  <td className="py-3">
-                    {service.year_of_experience || "0"} years
-                  </td>
+                  <td className="py-3 font-medium">Created At</td>
+                  <td className="py-3">{service?.created_at || "N/A"}</td>
                 </tr>
                 <tr className="border-b">
-                  <td className="py-3 font-medium">Language</td>
-                  <td className="py-3">{service.language || "N/A"}</td>
+                  <td className="py-3 font-medium">Updated At</td>
+                  <td className="py-3">{service?.updated_at || "N/A"}</td>
                 </tr>
               </tbody>
             </table>
           </div>
-
-          <div>
-            <h2 className="text-xl font-semibold mb-4">
-              Location & Availability
-            </h2>
-            <table className="w-full">
-              <tbody>
-                <tr className="border-b">
-                  <td className="py-3 font-medium">Country</td>
-                  <td className="py-3">{service.country || "N/A"}</td>
-                </tr>
-                <tr className="border-b">
-                  <td className="py-3 font-medium">State</td>
-                  <td className="py-3">{service.state || "N/A"}</td>
-                </tr>
-                <tr className="border-b">
-                  <td className="py-3 font-medium">City</td>
-                  <td className="py-3">{service.city || "N/A"}</td>
-                </tr>
-                <tr className="border-b">
-                  <td className="py-3 font-medium">Start Time</td>
-                  <td className="py-3">
-                    {service.availability_start_time || "N/A"}
-                  </td>
-                </tr>
-                <tr className="border-b">
-                  <td className="py-3 font-medium">End Time</td>
-                  <td className="py-3">
-                    {service.availability_end_time || "N/A"}
-                  </td>
-                </tr>
-                <tr className="border-b">
-                  <td className="py-3 font-medium">Coordinates</td>
-                  <td className="py-3">
-                    {service.latitude && service.longitude ? (
-                      <p>
-                        Lattitude:{service.latitude}, 
-                        Longitude:{service.longitude}
-                      </p>
-                    ) : (
-                      "N/A"
-                    )}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div className="mt-6">
-          <h2 className="text-xl font-semibold mb-4">Subscription Details</h2>
-          <table className="w-full">
-            <tbody>
-              <tr className="border-b">
-                <td className="py-3 font-medium">Subscription Type</td>
-                <td className="py-3">{service.subscription_expires_at || "N/A"}</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-3 font-medium">Expires At</td>
-                <td className="py-3">
-                  {service.subscription_expires_at || "N/A"}
-                </td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-3 font-medium">Created By</td>
-                <td className="py-3">{service.created_by || "N/A"}</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-3 font-medium">Created At</td>
-                <td className="py-3">{service.created_at || "N/A"}</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-3 font-medium">Updated At</td>
-                <td className="py-3">{service.updated_at || "N/A"}</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </div>

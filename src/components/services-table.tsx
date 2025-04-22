@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Service } from "@/lib/types";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import ServiceDetails from "@/pages/ServiceDetails";
 // import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 // import { Badge } from "@/components/ui/badge"
 
@@ -32,6 +33,7 @@ interface ServicesTableProps {
 export function ServicesTable({ services, updateService }: ServicesTableProps) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<Partial<Service>>({});
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const { token } = useAuth();
 
@@ -123,9 +125,7 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
                       className="max-w-[200px]"
                     />
                   ) : (
-                    <p className="font-semibold">
-                      {service.name}
-                    </p>
+                    <p className="font-semibold">{service.name}</p>
                   )}
                 </TableCell>
                 <TableCell>
@@ -292,7 +292,8 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           className="cursor-pointer hover:bg-gray-400 transition-all"
-                          onClick={() => navigate(`/services/${service.id}`)}
+                          // onClick={() => navigate(`/services/${service.id}`)}
+                          onClick={() => setShowModal(true)}
                         >
                           <p>{">> "}</p>
                           Full details
@@ -303,6 +304,12 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
                           Delete
                         </DropdownMenuItem>
                       </DropdownMenuContent>
+                      {showModal && (
+                        <ServiceDetails
+                          id={service.id}
+                          onClose={() => setShowModal(false)}
+                        />
+                      )}
                     </DropdownMenu>
                   )}
                 </TableCell>
