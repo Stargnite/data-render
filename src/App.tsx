@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { AdminDashboard } from "./pages/dashboard";
 import { SidebarProvider } from "./components/ui/sidebar";
 import CategoriesPage from "./pages/CategoriesPage";
+import ServiceDetails from "./pages/ServiceDetails";
 
 function App() {
   return (
@@ -18,6 +19,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <CategoriesPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/services/:id"
+            element={
+              <ProtectedRoute>
+                <ServiceDetails />
               </ProtectedRoute>
             }
           />
@@ -40,7 +49,6 @@ function App() {
 export default App;
 
 // import Home from "./pages/Home";
-// import ServiceDetails from "./pages/ServiceDetails";
 
 // import type { Service } from "./lib/types";
 // import { useNavigate } from "react-router-dom";

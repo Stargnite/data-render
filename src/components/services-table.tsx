@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Service } from "@/lib/types";
 import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 // import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 // import { Badge } from "@/components/ui/badge"
 
@@ -31,7 +32,8 @@ interface ServicesTableProps {
 export function ServicesTable({ services, updateService }: ServicesTableProps) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<Partial<Service>>({});
-  const {token} = useAuth();
+  const navigate = useNavigate();
+  const { token } = useAuth();
 
   const startEditing = (service: Service) => {
     setEditingId(service.id);
@@ -53,9 +55,9 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
     setEditForm({});
   };
 
-  const saveEditing = async(id: string) => {
-        try {
-      console.log("Token being used>>>>>>>>.", token)
+  const saveEditing = async (id: string) => {
+    try {
+      console.log("Token being used>>>>>>>>.", token);
 
       const response = await fetch(
         `https://consultapi.vindove.com/api/v1/admin/services/${id}`,
@@ -69,7 +71,7 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
         }
       );
 
-      console.log(editForm)
+      console.log(editForm);
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Failed to update service");
@@ -83,7 +85,6 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
       setEditingId(null);
       setEditForm({});
     }
-
   };
 
   const handleChange = (field: keyof Service, value: string) => {
@@ -91,7 +92,7 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
   };
 
   return (
-    <div className="rounded-md border overflow-x-auto max-w-full md:max-w-[79vw]">
+    <div className="rounded-md border overflow-x-auto max-w-full md:max-w-[79vw] bg-white text-gray-700">
       <div className="">
         <Table className="w-full border-collapse">
           <TableHeader>
@@ -105,7 +106,9 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
               <TableHead>Language</TableHead>
               <TableHead>Website</TableHead>
               <TableHead>Price/hour</TableHead>
-              <TableHead className="sticky right-0 bg-gray-800 z-10 shadow-md">Actions</TableHead>
+              <TableHead className="sticky right-0 bg-white border-l-[1px] z-10 shadow-md">
+                Actions
+              </TableHead>
             </TableRow>
           </TableHeader>
 
@@ -120,7 +123,9 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
                       className="max-w-[200px]"
                     />
                   ) : (
-                    service.name
+                    <p className="font-semibold">
+                      {service.name}
+                    </p>
                   )}
                 </TableCell>
                 <TableCell>
@@ -242,7 +247,7 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
                   <Badge variant={service.status === "Active" ? "default" : "secondary"}>{service.status}</Badge>
                 )}
               </TableCell> */}
-                <TableCell className="text-right sticky right-0 border bg-gray-800 text-right z-10 shadow-md">
+                <TableCell className="text-right sticky right-0 border bg-white z-10 shadow-md">
                   {editingId === service.id ? (
                     <div className="flex justify-end gap-2">
                       <Button
@@ -259,11 +264,22 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
                       >
                         <X className="h-4 w-4" />
                       </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => navigate(`/services/${service.id}`)}
+                      >
+                        Full details {">"}
+                      </Button>
                     </div>
                   ) : (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="icon" className="hover:bg-gray-500 cursor-pointer">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="hover:bg-gray-500 cursor-pointer"
+                        >
                           <MoreHorizontal className="h-4 w-4" />
                           <span className="sr-only">Open menu</span>
                         </Button>
@@ -281,6 +297,14 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
                           <Pencil className="mr-2 h-4 w-4" />
                           Edit
                         </DropdownMenuItem>
+                        <DropdownMenuItem
+                          className="cursor-pointer hover:bg-gray-400 transition-all"
+                          onClick={() => navigate(`/services/${service.id}`)}
+                        >
+                          <p>{">> "}</p>
+                          Full details
+                        </DropdownMenuItem>
+
                         <DropdownMenuItem className="cursor-pointer hover:bg-gray-400 transition-all">
                           <Trash2 className="mr-2 h-4 w-4" />
                           Delete
