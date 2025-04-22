@@ -20,7 +20,7 @@ import {
 
 export function AppSidebar() {
   return (
-    <Sidebar className="icon bg-gray-300 text-black">
+    <Sidebar className="icon bg-white text-black shadow-lg border-0">
       <SidebarHeader className="border-b">
         <SidebarMenu>
           <SidebarMenuItem>
@@ -32,8 +32,8 @@ export function AppSidebar() {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarMenu className="h-full flex flex-col gap-y-10 py-5 px-1">
-          <SidebarMenuItem className="hover:bg-gray-700 hover:text-white transition-all py-2 rounded-md">
+        <SidebarMenu className="h-full flex flex-col gap-y-5 py-5 px-1">
+          <SidebarMenuItem className="hover:bg-[#4C6EF5] hover:text-white transition-all py-2 rounded-md">
             <SidebarMenuButton asChild isActive>
               <a href="#">
                 <LayoutDashboard />
@@ -41,7 +41,7 @@ export function AppSidebar() {
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
-          <SidebarMenuItem className="hover:bg-gray-700 hover:text-white transition-all py-2 rounded-md">
+          <SidebarMenuItem className="hover:bg-[#4C6EF5] hover:text-white transition-all py-2 rounded-md">
             <SidebarMenuButton asChild>
               <a href="#">
                 <ShoppingCart />
@@ -49,7 +49,7 @@ export function AppSidebar() {
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
-          <SidebarMenuItem className="hover:bg-gray-700 hover:text-white transition-all py-2 rounded-md">
+          <SidebarMenuItem className="hover:bg-[#4C6EF5] hover:text-white transition-all py-2 rounded-md">
             <SidebarMenuButton asChild>
               <a href="#">
                 <Users />
@@ -57,7 +57,7 @@ export function AppSidebar() {
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
-          <SidebarMenuItem className="hover:bg-gray-700 hover:text-white transition-all py-2 rounded-md">
+          <SidebarMenuItem className="hover:bg-[#4C6EF5] hover:text-white transition-all py-2 rounded-md">
             <SidebarMenuButton asChild>
               <a href="#">
                 <BarChart3 />
@@ -65,7 +65,7 @@ export function AppSidebar() {
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
-          <SidebarMenuItem className="hover:bg-gray-700 hover:text-white transition-all py-2 rounded-md">
+          <SidebarMenuItem className="hover:bg-[#4C6EF5] hover:text-white transition-all py-2 rounded-md">
             <SidebarMenuButton asChild>
               <a href="#">
                 <Settings />

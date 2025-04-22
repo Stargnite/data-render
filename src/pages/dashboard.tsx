@@ -50,7 +50,7 @@ export function AdminDashboard() {
   };
 
   return (
-    <div className="flex h-screen bg-background w-full bg-gray-800 text-white">
+    <div className="flex h-screen bg-background w-full bg-blue-50  text-gray-800">
       <AppSidebar />
       <SidebarInset className="">
         <div className="flex flex-col w-full h-full">
@@ -64,9 +64,9 @@ export function AdminDashboard() {
                 Manage your service offerings and pricing
               </p>
             </div>
-            <div className="grid gap-4 md:gap-8 mb-6 text-gray-700">
+            <div className="grid gap-4 md:gap-8 mb-6 text-white">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                <div className="rounded-xl border bg-card text-card-foreground shadow p-6 bg-gray-300">
+                <div className="rounded-xl border text-card-foreground shadow p-6 bg-[#729efd]">
                   <div className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <h3 className="tracking-tight text-sm font-medium">
                       Total Services
@@ -74,21 +74,21 @@ export function AdminDashboard() {
                   </div>
                   <div className="text-2xl font-bold">{totalServices}</div>
                 </div>
-                <div className="rounded-xl border bg-card text-card-foreground shadow p-6 bg-gray-300">
+                <div className="rounded-xl border text-card-foreground shadow p-6 bg-[#729efd]">
                   <div className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <h3 className="tracking-tight text-sm font-medium">
                       Active Services
                     </h3>
                   </div>
-                  {/* <div className="text-2xl font-bold">{services.filter((s) => s.status === "Active").length}</div> */}
+                  <div className="text-2xl font-bold">{services.filter((s) => s.status === "ACTIVE").length}</div>
                 </div>
-                <div className="rounded-xl border bg-card text-card-foreground shadow p-6 bg-gray-300">
+                <div className="rounded-xl border text-card-foreground shadow p-6 bg-[#729efd]">
                   <div className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <h3 className="tracking-tight text-sm font-medium">
                       Inactive Services
                     </h3>
                   </div>
-                  {/* <div className="text-2xl font-bold">{services.filter((s) => s.status === "Inactive").length}</div> */}
+                  <div className="text-2xl font-bold">{services.filter((s) => s.status === "Inactive").length}</div>
                 </div>
               </div>
             </div>
@@ -105,7 +105,7 @@ export function AdminDashboard() {
             <div className="flex justify-center gap-x-5 items-center my-5">
               <button
                 className={`text-lg text-blue-500 cursor-pointer hover:text-white/50 transition-all ${
-                  pageNumber === 1 && "text-white"
+                  pageNumber === 1 && "text-gray-700"
                 }`}
                 onClick={() => setPageNumber(1)}
               >
@@ -113,7 +113,7 @@ export function AdminDashboard() {
               </button>
               <button
                 className={`text-lg text-blue-500 cursor-pointer hover:text-white/50 transition-all ${
-                  pageNumber === 2 && "text-white"
+                  pageNumber === 2 && "text-gray-700"
                 }`}
                 onClick={() => setPageNumber(2)}
               >
@@ -121,7 +121,7 @@ export function AdminDashboard() {
               </button>
               <button
                 className={`text-lg text-blue-500 cursor-pointer hover:text-white/50 transition-all ${
-                  pageNumber === 3 && "text-white"
+                  pageNumber === 3 && "text-gray-700"
                 }`}
                 onClick={() => setPageNumber(3)}
               >

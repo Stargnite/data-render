@@ -19,28 +19,28 @@ export function Navbar() {
   const { logout } = useAuth();
   const navigate = useNavigate();
   return (
-    <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+    <header className="sticky top-0 z-10 flex h-16 bg-white text-gray-900 shadow-lg items-center gap-4 border-b bg-background px-4 md:px-6">
       <SidebarTrigger />
       {/* <div className="hidden md:flex md:flex-1 md:items-center md:gap-4"></div> */}
       <div className="ml-auto flex items-center gap-2">
         <Link to="/categories">
           <Button
             variant="ghost"
-            className="cursor-pointer hover:text-white/70"
+            className="cursor-pointer font-semibold hover:text-gray-700"
           >
-            <span className="">Service Categories</span>
+            <span className=""> Categories</span>
           </Button>
         </Link>
 
-        <button
+        <Button
           onClick={() => {
             logout();
             navigate("/login");
           }}
-          className="text-blue-600 underline "
+          className="bg-[#4C6EF5] text-white hover:bg-[#93a4e7] cursor-pointer"
         >
           Logout
-        </button>
+        </Button>
       </div>
     </header>
   );

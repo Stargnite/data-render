@@ -264,7 +264,7 @@ function SidebarTrigger({
       data-slot="sidebar-trigger"
       variant="ghost"
       size="icon"
-      className={cn("size-7 cursor-pointer hover:bg-gray-600", className)}
+      className={cn("size-7 cursor-pointer hover:bg-blue-600 hover:text-white", className)}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()
