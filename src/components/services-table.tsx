@@ -264,13 +264,6 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
                       >
                         <X className="h-4 w-4" />
                       </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => navigate(`/services/${service.id}`)}
-                      >
-                        Full details {">"}
-                      </Button>
                     </div>
                   ) : (
                     <DropdownMenu>
