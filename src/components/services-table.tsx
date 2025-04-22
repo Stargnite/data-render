@@ -84,10 +84,6 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
       setEditForm({});
     }
 
-
-
-
-
   };
 
   const handleChange = (field: keyof Service, value: string) => {
@@ -95,7 +91,7 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
   };
 
   return (
-    <div className="rounded-md border overflow-x-auto max-w-[79vw]">
+    <div className="rounded-md border overflow-x-auto max-w-full md:max-w-[79vw]">
       <div className="">
         <Table className="w-full border-collapse">
           <TableHeader>
