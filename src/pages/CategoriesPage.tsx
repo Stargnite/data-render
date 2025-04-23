@@ -1,18 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "./../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-// type CategoriesType = {
-//   id: string
-//   name: string
-//   description: string
-//   slug: string
-//   icon_url: string
-
-// }
+type CategoriesType = {
+  id: string;
+  name: string;
+  description: string;
+  slug: string;
+  icon_url: string;
+};
 
 const CategoriesPage = () => {
-  // const [categories, setCategories] = useState<CategoriesType[]>([]);
+  const [categories, setCategories] = useState<CategoriesType[]>([]);
   const navigate = useNavigate();
   const { token } = useAuth();
   useEffect(() => {
@@ -29,9 +28,9 @@ const CategoriesPage = () => {
           }
         );
 
-        const data = response.json();
-        // setCategories(data.data);
-        console.log("Service categories data>>>>>>>>>>>>>>", data);
+        const data = await response.json();
+        setCategories(data.data);
+        console.log("Service categories data>>>>>>>>>>>>>>", data.data);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
       }
@@ -49,7 +48,18 @@ const CategoriesPage = () => {
         Back to services
       </button>
 
-      {/* {categories} */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+        {categories.map((category: CategoriesType) => (
+          <div className="m-5 max-w-[300px]" key={category.id}>
+            <div className="">
+              <img src={category.icon_url} alt={category.name} />
+              <h1>{category.name}</h1>
+            </div>
+            <p>{category.description}</p>
+            <p>{category.slug}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

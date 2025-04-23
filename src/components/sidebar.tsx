@@ -17,6 +17,7 @@ import {
   SidebarMenuItem,
   // SidebarRail,
 } from "@/components/ui/sidebar";
+import { Link } from "react-router-dom";
 
 export function AppSidebar() {
   return (
@@ -35,25 +36,25 @@ export function AppSidebar() {
         <SidebarMenu className="h-full flex flex-col gap-y-5 py-5 px-1">
           <SidebarMenuItem className="hover:bg-[#4C6EF5] hover:text-white transition-all py-2 rounded-md">
             <SidebarMenuButton asChild isActive>
-              <a href="#">
+              <Link to="/">
                 <LayoutDashboard />
                 <span>Dashboard</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem className="hover:bg-[#4C6EF5] hover:text-white transition-all py-2 rounded-md">
             <SidebarMenuButton asChild>
-              <a href="#">
+              <Link to="/categories">
                 <ShoppingCart />
-                <span>Services</span>
-              </a>
+                <span>Categories</span>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem className="hover:bg-[#4C6EF5] hover:text-white transition-all py-2 rounded-md">
             <SidebarMenuButton asChild>
-              <a href="#">
+              <a href="/plans">
                 <Users />
-                <span>Customers</span>
+                <span>Plans</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
