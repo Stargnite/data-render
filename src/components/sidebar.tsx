@@ -46,7 +46,7 @@ export function AppSidebar() {
             <SidebarMenuButton asChild>
               <Link to="/categories">
                 <ShoppingCart />
-                <span>Categories</span>
+                <span>All Categories</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
