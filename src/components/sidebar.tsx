@@ -52,10 +52,10 @@ export function AppSidebar() {
           </SidebarMenuItem>
           <SidebarMenuItem className="hover:bg-[#4C6EF5] hover:text-white transition-all py-2 rounded-md">
             <SidebarMenuButton asChild>
-              <a href="/plans">
+              <Link to="/plans">
                 <Users />
                 <span>Plans</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem className="hover:bg-[#4C6EF5] hover:text-white transition-all py-2 rounded-md">

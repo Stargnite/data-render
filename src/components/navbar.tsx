@@ -21,6 +21,15 @@ export function Navbar() {
           </Button>
         </Link>
 
+        <Link to="/plans">
+          <Button
+            variant="ghost"
+            className="cursor-pointer font-semibold hover:text-gray-700"
+          >
+            <span className="">Plans</span>
+          </Button>
+        </Link>
+
         <Button
           onClick={() => {
             logout();

@@ -17,7 +17,7 @@ type ModalProps = {
   onClose: () => void;
 };
 
-const MembershipPlansPage = ({ id, onClose }: ModalProps) => {
+const PlansModal = ({ id, onClose }: ModalProps) => {
   const [plan, setPlan] = useState<PlanType | null>(null);
   const [editForm, setEditForm] = useState<Partial<PlanType>>({});
   const [isLoading, setIsLoading] = useState(false);
@@ -27,16 +27,16 @@ const MembershipPlansPage = ({ id, onClose }: ModalProps) => {
 
   useEffect(() => {
     console.log("PlansToken and id>>>>>>>>>>>>>", token, id);
-    if (!id || !token) alert("No Token or ID"); return;
+    // if (!id || !token) alert("No Token or ID"); return;
     const fetchPlan = async () => {
       setIsLoading(true);
       try {
         const res = await fetch(
-          `https://consultapi.vindove.com/api/v1/admin/plans/${id}`,
+          `https://consultapi.vindove.com/api/v1/admin/plans`,
           {
             method: "GET",
             headers: {
-              "Content-Type": "application/json",
+              "Content-Type": "application/vnd.api+json",
               Authorization: `Bearer ${token}`,
             },
           }
@@ -57,7 +57,7 @@ const MembershipPlansPage = ({ id, onClose }: ModalProps) => {
       }
     };
 
-    if (token) fetchPlan();
+    fetchPlan();
   }, [id, token]);
 
   const handleChange = (field: keyof PlanType, value: string | number) => {
@@ -172,4 +172,4 @@ const MembershipPlansPage = ({ id, onClose }: ModalProps) => {
   );
 };
 
-export default MembershipPlansPage;
+export default PlansModal;

@@ -45,3 +45,15 @@ export interface Pricing {
   created_at: string;
   updated_at: string;
 }
+
+export interface Plan {
+  id: string;
+  name: string;
+  price: 0;
+  type: string;
+  currency: string;
+  stripe_product_id: string | null;
+  stripe_price_id: string | null;
+  created_at: string;
+  updated_at: string
+}

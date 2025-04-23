@@ -6,7 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { AdminDashboard } from "./pages/dashboard";
 import { SidebarProvider } from "./components/ui/sidebar";
 import CategoriesPage from "./pages/CategoriesPage";
-// import MembershipPlansPage from "./pages/MembershipPlansPage";
+import PlansPage from "./pages/PlansPage";
 // import ServiceDetails from "./pages/ServiceDetails";
 
 function App() {
@@ -23,14 +23,14 @@ function App() {
               </ProtectedRoute>
             }
           />
-          {/* <Route
-            path="/plans/:id"
+          <Route
+            path="/plans"
             element={
               <ProtectedRoute>
-                <MembershipPlansPage />
+                <PlansPage />
               </ProtectedRoute>
             }
-          /> */}
+          />
           <Route
             path="/"
             element={

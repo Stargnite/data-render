@@ -20,9 +20,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Service } from "@/lib/types";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 import ServiceDetails from "@/pages/ServiceDetails";
-import MembershipPlansPage from "@/pages/MembershipPlansPage";
+// import { useNavigate } from "react-router-dom";
 // import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 // import { Badge } from "@/components/ui/badge"
 
@@ -35,8 +34,6 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<Partial<Service>>({});
   const [showModal, setShowModal] = useState(false);
-  const [showPlansModal, setShowPlansModal] = useState(false);
-  const navigate = useNavigate();
   const { token } = useAuth();
 
   const startEditing = (service: Service) => {
@@ -234,21 +231,6 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
                   )}
                 </TableCell>
 
-                {/* <TableCell>
-                {editingId === service.id ? (
-                  <Select value={editForm.status} onValueChange={(value) => handleChange("status", value)}>
-                    <SelectTrigger className="w-[130px]">
-                      <SelectValue placeholder="Select status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Active">Active</SelectItem>
-                      <SelectItem value="Inactive">Inactive</SelectItem>
-                    </SelectContent>
-                  </Select>
-                ) : (
-                  <Badge variant={service.status === "Active" ? "default" : "secondary"}>{service.status}</Badge>
-                )}
-              </TableCell> */}
                 <TableCell className="text-right sticky right-0 border bg-white z-10 shadow-md">
                   {editingId === service.id ? (
                     <div className="flex justify-end gap-2">
@@ -300,22 +282,6 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
                           Full details
                         </DropdownMenuItem>
 
-                        <DropdownMenuItem
-                          className="cursor-pointer hover:bg-blue-400 hover:text-white transition-all"
-                          onClick={() => setShowPlansModal(true)}
-                        >
-                          <Pencil className="mr-2 h-4 w-4" />
-                          Edit Plans
-                        </DropdownMenuItem>
-
-                        {/* <DropdownMenuItem
-                          onClick={() => navigate(`/plans/${service.id}`)}
-                          className="cursor-pointer hover:bg-blue-400 hover:text-white transition-all"
-                        >
-                          <Pencil className="mr-2 h-4 w-4" />
-                          Edit Plans
-                        </DropdownMenuItem> */}
-
                         <DropdownMenuItem className="cursor-pointer hover:bg-blue-400 hover:text-white transition-all">
                           <Trash2 className="mr-2 h-4 w-4" />
                           Delete
@@ -325,13 +291,6 @@ export function ServicesTable({ services, updateService }: ServicesTableProps) {
                         <ServiceDetails
                           id={service.id}
                           onClose={() => setShowModal(false)}
-                        />
-                      )}
-
-                      {showPlansModal && (
-                        <MembershipPlansPage
-                          id={service.id}
-                          onClose={() => setShowPlansModal(false)}
                         />
                       )}
                     </DropdownMenu>
