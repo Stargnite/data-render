@@ -4,17 +4,6 @@ import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-// import { Input } from "@/components/ui/input"
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuItem,
-//   DropdownMenuLabel,
-//   DropdownMenuSeparator,
-//   DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu"
-// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-
 export function Navbar() {
   const { logout } = useAuth();
   const navigate = useNavigate();
