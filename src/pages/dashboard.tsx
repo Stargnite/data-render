@@ -29,7 +29,8 @@ export function AdminDashboard() {
         );
         const data = await response.json();
         setServices(data.data.data);
-        console.log(data.data.data);
+        // console.log(data.data.data);
+        console.log("dashboardtoken>>>>>>>>>", token);
         setIsLoading(false);
         setTotalServices(data.data.total);
       } catch (error) {

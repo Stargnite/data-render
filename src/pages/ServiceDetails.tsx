@@ -11,8 +11,6 @@ type ServiceModalProps = {
 export default function ServiceDetails({ id, onClose }: ServiceModalProps) {
   const [service, setService] = useState<Service | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  //   const { id } = useParams();
-  //   const navigate = useNavigate();
   const { token } = useAuth();
 
   useEffect(() => {
