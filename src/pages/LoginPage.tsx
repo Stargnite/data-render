@@ -37,7 +37,7 @@ export default function LoginPage() {
       console.log("This is the login response data >>>>>>", data);
 
       if (response.ok) {
-        const authToken = data.data["0"];
+        const authToken = data.data["access_token"];
         // console.log("Token:", authToken);
 
         login(authToken);
