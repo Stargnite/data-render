@@ -40,8 +40,8 @@ export default function LoginPage() {
         const authToken = data.data["access_token"];
         login(authToken);
         navigate("/");
-        console.log("Login Token:", authToken);
-
+        // console.log("Login Token:", authToken);
+// 
       } else {
         console.error("Login failed:", data);
         alert(data.message || "Login failed. Check your credentials.");
