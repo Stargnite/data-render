@@ -31,6 +31,7 @@ export default function PlansPage() {
       } catch (error: any) {
         console.error("Error fetching plan:", error);
         setIsLoading(false);
+        console.log(isLoading)
         // alert("error loading Plans Page");
       } finally {
       }

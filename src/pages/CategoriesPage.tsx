@@ -54,6 +54,7 @@ const CategoriesPage = () => {
         setCategories(data.data);
         // console.log("Service categories data>>>>>>>>>>>>>>", data.data);
         setIsLoading(false);
+        console.log(isLoading)
       } catch (error) {
         console.error("Failed to fetch categories:", error);
         setIsLoading(false);
